@@ -1,0 +1,58 @@
+- name: Copy /etc/apt/sources.list
+  copy:
+    src: etc/apt/sources.list
+    dest: /etc/apt/sources.list
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+
+- name: Install base packages for Debian
+  apt:
+    name: "{{ item }}"
+    state: present
+    dpkg_options: 'force-confold,force-confdef'
+  with_items:
+  - apt-transport-https
+  - apt-listchanges
+  - apt-utils
+  - apt-file
+  - lsb-release
+  - ca-certificates
+  - software-properties-common
+  - python-dev
+  - locales-all
+  - libssl-dev
+  - build-essential
+  - netcat
+  - vim
+  - sudo
+  - wget
+  - git
+  - nano
+  - screen
+  - curl
+  - htop
+  - openssl
+  - rsync
+  - zip
+  - unzip
+  - bash-completion
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+    
+- name: Update /etc/hosts file
+  blockinfile:
+    dest: /etc/hosts
+    content: "{{ lookup('template', 'templates/etc/hosts.j2') }}"
+    state: present

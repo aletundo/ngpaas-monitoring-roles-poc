@@ -1,0 +1,9 @@
+[admin-nodes]
+ngpaas-test-bastion-node
+
+[kafka-nodes]
+ngpaas-test-worker-node-1
+
+[application-nodes]
+ngpaas-test-worker-node-2
+ngpaas-test-worker-node-3
