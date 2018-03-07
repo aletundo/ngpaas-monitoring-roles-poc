@@ -1,0 +1,14 @@
+- name: restart elasticsearch
+  service:
+    name: elasticsearch.service
+    state: restarted
+
+- name: restart logstash
+  service:
+    name: logstash.service
+    state: restarted
+
+- name: restart kibana
+  service:
+    name: kibana.service
+    state: restarted

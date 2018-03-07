@@ -5,3 +5,12 @@
 - hosts: kafka-nodes
   roles:
     - kafka
+    
+- hosts: elk-nodes
+  roles:
+    - elk
+    
+- hosts: application-nodes
+  roles:
+    - filebeat
+    # - app

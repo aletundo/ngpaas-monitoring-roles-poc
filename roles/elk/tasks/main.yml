@@ -1,0 +1,114 @@
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+      
+- name: Add Elasticsearch apt key
+  apt_key:
+    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+- name: Add elastic apt repo
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/6.x/apt stable main"
+    state: present
+    filename: 'elastic'
+    
+- name: Install openjdk-8-jdk
+  apt:
+    name: openjdk-8-jdk
+    state: present
+
+- name: Install Elasticsearch
+  apt:
+    name: elasticsearch
+    state: present
+
+- name: Install Logstash
+  apt:
+    name: logstash
+    state: present
+
+- name: Install Kibana
+  apt:
+    name: kibana
+    state: present
+    
+- name: Create dir /srv/elasticsearch/
+  file:
+    path: /srv/elasticsearch/
+    state: directory
+
+- name: Create dir /srv/elasticsearch/data/
+  file:
+    path: /srv/elasticsearch/data/
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+
+- name: Create /etc/elasticsearch/elasticsearch.yml
+  template:
+    src: etc/elasticsearch/elasticsearch.yml
+    dest: /etc/elasticsearch/elasticsearch.yml
+  notify: restart elasticsearch
+
+- name: Create /etc/elasticsearch/log4j2.properties
+  template:
+    src: etc/elasticsearch/log4j2.properties
+    dest: /etc/elasticsearch/log4j2.properties
+  notify: restart elasticsearch
+
+- name: Create /etc/logstash/logstash.yml
+  template:
+    src: etc/logstash/logstash.yml
+    dest: /etc/logstash/logstash.yml
+  notify: restart logstash
+
+- name: Create /etc/logstash/conf.d files
+  template:
+    src: "etc/logstash/conf.d/{{ item }}"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+  with_items:
+  - input.conf
+  - output.conf
+  notify: restart logstash
+
+- name: Create /etc/kibana/kibana.yml
+  template:
+    src: etc/kibana/kibana.yml
+    dest: /etc/kibana/kibana.yml
+  notify: restart kibana
+
+- meta: flush_handlers
+
+- name: Start elasticsearch.service
+  service:
+    name: elasticsearch.service
+    state: started
+  tags: test
+
+- name: Enable elasticsearch.service
+  service:
+    name: elasticsearch.service
+    enabled: true
+  tags: test
+
+- name: Start logstash.service
+  service:
+    name: logstash.service
+    state: started
+
+- name: Enable logstash.service
+  service:
+    name: logstash.service
+    enabled: true
+
+- name: Start kibana.service
+  service:
+    name: kibana.service
+    state: started
+
+- name: Enable kibana.service
+  service:
+    name: kibana.service
+    enabled: true

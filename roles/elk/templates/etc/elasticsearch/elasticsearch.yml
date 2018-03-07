@@ -1,0 +1,5 @@
+http.cors.allow-origin: "/.*/"
+http.cors.enabled: true
+node.name: elasticsearch-node-1
+
+path.data: /srv/elasticsearch/data/
