@@ -1,0 +1,46 @@
+- name: Clone Fake-Apache-Log-Generator git repository
+  git:
+    repo: https://github.com/kiritbasu/Fake-Apache-Log-Generator.git
+    dest: /srv/fake-apache-log-generator
+    clone: yes
+    update: yes
+
+- name: Install pip
+  easy_install:
+    name: pip
+    state: present
+    
+- name: Install requirements using pip
+  pip:
+    requirements: /srv/fake-apache-log-generator/requirements.txt
+
+- name: Create fake-apache-log-generator log directory
+  file:
+    path: /var/log/fake-apache-log-generator
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+    
+- name: Copy /lib/systemd/system/fake-apache-log-generator.service
+  template:
+    src: lib/systemd/system/fake-apache-log-generator.service
+    dest: /lib/systemd/system/fake-apache-log-generator.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reload systemd for fake-apache-log-generator.service
+  systemd:
+    daemon_reload: yes
+    name: fake-apache-log-generator.service
+
+- name: Enable fake-apache-log-generator service
+  service:
+    name: fake-apache-log-generator
+    enabled: yes
+
+- name: Start fake-apache-log-generator service
+  service:
+    name: fake-apache-log-generator
+    state: started

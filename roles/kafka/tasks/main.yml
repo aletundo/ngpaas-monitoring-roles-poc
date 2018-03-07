@@ -43,7 +43,7 @@
     owner: kafka
     group: kafka
 
-- name: copy /lib/systemd/system/kafka.service
+- name: Copy /lib/systemd/system/kafka.service
   template:
     src: lib/systemd/system/kafka.service
     dest: /lib/systemd/system/kafka.service
@@ -51,7 +51,7 @@
     group: root
     mode: 0644
 
-- name: kafka.service reload systemd
+- name: Reload systemd for kafka.service
   systemd:
     daemon_reload: yes
     name: kafka.service

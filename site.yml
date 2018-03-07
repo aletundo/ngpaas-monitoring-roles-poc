@@ -13,4 +13,4 @@
 - hosts: application-nodes
   roles:
     - filebeat
-    # - app
+    - app
