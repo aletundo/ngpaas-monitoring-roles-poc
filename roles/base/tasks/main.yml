@@ -28,7 +28,6 @@
   - locales-all
   - libssl-dev
   - build-essential
-  - netcat
   - vim
   - sudo
   - wget

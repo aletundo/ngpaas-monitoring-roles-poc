@@ -3,3 +3,4 @@ http.cors.enabled: true
 node.name: elasticsearch-node-1
 
 path.data: /srv/elasticsearch/data/
+path.logs: /srv/elasticsearch/log/

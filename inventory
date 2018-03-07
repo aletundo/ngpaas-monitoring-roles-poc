@@ -1,9 +1,9 @@
 [elk-nodes]
-ngpaas-test-bastion-node
+ngpaas-test-node-1
 
 [kafka-nodes]
-ngpaas-test-worker-node-1
+ngpaas-test-node-2
 
 [application-nodes]
-ngpaas-test-worker-node-2
-ngpaas-test-worker-node-3
+ngpaas-test-node-3
+ngpaas-test-node-4

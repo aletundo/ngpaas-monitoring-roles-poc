@@ -1,0 +1,18 @@
+- name: Copy /etc/apt/sources.list
+  copy:
+    src: etc/apt/sources.list
+    dest: /etc/apt/sources.list
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+    
+- name: Install netcat
+  apt:
+    name: netcat
+    state: present
+    dpkg_options: 'force-confold,force-confdef'

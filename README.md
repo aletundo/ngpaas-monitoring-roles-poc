@@ -1,7 +1,7 @@
 # ngpaas-monitoring-roles-poc
 
 ## Synopsis
-This repository is a proof-of-concept (POC) for the ngpaas monitoring stack deploy.
+This repository is a Proof of Concept (PoC) for the NGPaaS monitoring stack deploy.
 
 ## Getting started
 

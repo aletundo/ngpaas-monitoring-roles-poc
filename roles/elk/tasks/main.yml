@@ -46,16 +46,17 @@
     owner: elasticsearch
     group: elasticsearch
 
+- name: Create dir /srv/elasticsearch/log/
+  file:
+    path: /srv/elasticsearch/log/
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+
 - name: Create /etc/elasticsearch/elasticsearch.yml
   template:
     src: etc/elasticsearch/elasticsearch.yml
     dest: /etc/elasticsearch/elasticsearch.yml
-  notify: restart elasticsearch
-
-- name: Create /etc/elasticsearch/log4j2.properties
-  template:
-    src: etc/elasticsearch/log4j2.properties
-    dest: /etc/elasticsearch/log4j2.properties
   notify: restart elasticsearch
 
 - name: Create /etc/logstash/logstash.yml

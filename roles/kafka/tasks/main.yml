@@ -65,10 +65,18 @@
   service:
     name: kafka
     state: started
+    
 
-- name: Copy /etc/kafka.server.properties
+- name: Create kafka etc dir
+  file:
+    path: /etc/kafka
+    state: directory
+    owner: kafka
+    group: kafka
+
+- name: Copy /etc/kafka/server.properties
   template:
-    src: etc/kafka.server.properties
-    dest: /etc/kafka.server.properties
+    src: etc/kafka/server.properties
+    dest: /etc/kafka/server.properties
   notify:
   - restart kafka

@@ -8,7 +8,7 @@ Type=simple
 User=kafka
 Group=kafka
 ExecStart=/opt/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/bin/kafka-server-start.sh \
-  /etc/kafka.server.properties
+  /etc/kafka/server.properties
 ExecStop=/opt/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/bin/kafka-server-stop.sh
 PrivateTmp=true
 Restart=on-failure

@@ -9,11 +9,17 @@ filebeat:
       log_type: syslog
       main_group: "{{ group_names[0] }}"
       syslog: true
+  - type: log
+    paths:
+      - /var/log/fake-apache-log-generator/web_*.log
+    fields:
+      log_type: apache2-access
+      main_group: "{{ group_names[0] }}"
   modules: []
 output:
   kafka:
     version: 0.10.2.1
-    hosts: ["ngpaas-test-worker-node-1:9092"]
+    hosts: ["ngpaas-test-node-2:9092"]
     required_acks: 1
     compression: gzip
     topic: "logstash"
