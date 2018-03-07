@@ -1,4 +1,4 @@
-[admin-nodes]
+[elk-nodes]
 ngpaas-test-bastion-node
 
 [kafka-nodes]
