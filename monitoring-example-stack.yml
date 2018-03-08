@@ -1,11 +1,3 @@
-- hosts: elk-nodes
-  roles:
-    - bastion
-
-- hosts: all
-  roles:
-    - base
-    
 - hosts: kafka-nodes
   roles:
     - kafka
